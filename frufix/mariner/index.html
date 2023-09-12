@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Mariner FRU Fix v1.6</title>
+  <title>Mariner FRU Fix v1.7</title>
   <script>
     
     function generateCommands() {
@@ -14,7 +14,6 @@
         const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
         navigator.clipboard.writeText(Output_Data);
         document.getElementById('Output_Commands').value = `Commands:\n${Output_Data)}`;
-        return false;
     }
     
   </script>  
