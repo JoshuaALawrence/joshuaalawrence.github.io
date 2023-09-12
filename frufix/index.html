@@ -4,7 +4,8 @@
 
     
     function generateCommands() {
-        var ChassisPartNumber_Command = `set system cmd -c fru edit 0 field c 0 ${document.getElementByID('ChassisPartNumber_Command').value}`
+        var uHeight = document.getElementById("uheight").value;
+        var ChassisPartNumber_Command = `set system cmd -c fru edit 0 field c 0 -i${uHeight} ${document.getElementById('ChassisPartNumber_Command').value}`
         var ChassisSerialNumber_Command = 'set system cmd -c fru edit 0 field c 1'
         var ProductPartNumber_Command = 'set system cmd -c fru edit 0 field p 2'
         var ProductSerialNumber_Command = 'set system cmd -c fru edit 0 field p 4'
@@ -21,6 +22,8 @@
 </head>
 <body>
   <form onSubmit="return generateCommands()">
+    <p><label for="uheight">Blade # or UHeight</label></p>
+    <p><input type="text" id="uheight" name="uheight" value=""></p>
     <p><label for="ChassisPartNumber_Command">Chassis Part Number</label></p>
     <p><input type="text" id="ChassisPartNumber_Command" name="ChassisPartNumber_Command" value=""></p>
     
