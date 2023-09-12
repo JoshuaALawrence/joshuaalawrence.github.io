@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Mariner FRU Fix v1.2</title>
+  <title>Mariner FRU Fix v1.3</title>
   <script>
     
     function generateCommands() {
@@ -23,7 +23,7 @@
   </style>
 </head>
 <body>
-  <form onSubmit="return generateCommands()" method="post">
+  <form onSubmit="return false">
     <p><label for="uheight">Blade # or UHeight</label></p>
     <p><input type="text" id="uheight" name="uheight" value="" placeholder="1"></p>
     
@@ -45,7 +45,7 @@
     <p><label for="BoardPartNumber_Command">Board Part Number</label></p>
     <p><input type="text" id="BoardPartNumber_Command" name="BoardPartNumber_Command" value="" placeholder="M1143271-001"></p>
     
-    <p><input name="submit"  type="submit" value="Generate" /></p>
+    <p><input name="submit" onclick="generateCommands()"  type="button" value="Generate" /></p>
   </form> 
 
   <textarea id="Output_Commands" style="width: 250px;">Commands:\nAwaiting Generation</textarea>
