@@ -12,7 +12,7 @@
         var BoardPartNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value}`
         const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
         navigator.clipboard.writeText(Output_Data);
-        document.getElementById('Output_Commands').innerHTML = `Commands:<br>${Output_Data.replace("\n","<br>")}`;
+        document.getElementById('Output_Commands').innerHTML = `Commands:<br>${Output_Data.split("\n").join("<br>"))}`;
         return false;
     }
     
