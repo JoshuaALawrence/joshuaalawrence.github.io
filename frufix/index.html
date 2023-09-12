@@ -1,15 +1,16 @@
 <html>
 <head>
   <script>
-    var ChassisPartNumber_Command = 'set system cmd -c fru edit 0 field c 0'
-    var ChassisSerialNumber_Command = 'set system cmd -c fru edit 0 field c 1'
-    var ProductPartNumber_Command = 'set system cmd -c fru edit 0 field p 2'
-    var ProductSerialNumber_Command = 'set system cmd -c fru edit 0 field p 4'
-    var ProductAssetTag_Command = 'set system cmd -c fru edit 0 field p 5'
-    var BoardPartNumber_Command = 'set system cmd -c fru edit 0 field b 3'
+
     
     function generateCommands() {
-
+        var ChassisPartNumber_Command = `set system cmd -c fru edit 0 field c 0 ${document.getElementByID('ChassisPartNumber_Command').value}`
+        var ChassisSerialNumber_Command = 'set system cmd -c fru edit 0 field c 1'
+        var ProductPartNumber_Command = 'set system cmd -c fru edit 0 field p 2'
+        var ProductSerialNumber_Command = 'set system cmd -c fru edit 0 field p 4'
+        var ProductAssetTag_Command = 'set system cmd -c fru edit 0 field p 5'
+        var BoardPartNumber_Command = 'set system cmd -c fru edit 0 field b 3'
+        alert(ChassisPartNumber_Command);
     }
     
   </script>  
