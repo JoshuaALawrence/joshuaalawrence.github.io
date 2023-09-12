@@ -1,7 +1,9 @@
 <html>
 <head>
   <script>
-
+    if (!window.location.href.includes("?version=f36af9")) {
+          window.location.href = window.location.href + "?version=f36af9";
+    }
     
     function generateCommands() {
         var uHeight = document.getElementById("uheight").value;
