@@ -1,3 +1,27 @@
 <html>
-  test2
+<head>
+  <script>
+    var ChassisPartNumber_Command = 'set system cmd -c fru edit 0 field c 0'
+    var ChassisSerialNumber_Command = 'set system cmd -c fru edit 0 field c 1'
+    var ProductPartNumber_Command = 'set system cmd -c fru edit 0 field p 2'
+    var ProductSerialNumber_Command = 'set system cmd -c fru edit 0 field p 4'
+    var ProductAssetTag_Command = 'set system cmd -c fru edit 0 field p 5'
+    var BoardPartNumber_Command = 'set system cmd -c fru edit 0 field b 3'
+    
+    function generateCommands() {
+
+    }
+    
+  </script>  
+  <style>
+    
+  </style>
+</head>
+<body>
+  <form onSubmit="return generateCommands()">
+    <input type="text" id="html" name="fav_language" value="ChassisPartNumber_Command">
+    <label for="ChassisPartNumber_Command">Chassis Part Number</label><br>
+   
+  </form> 
+</body> 
 </html>
