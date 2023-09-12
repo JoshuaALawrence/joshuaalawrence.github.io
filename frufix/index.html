@@ -1,19 +1,23 @@
 <html>
 <head>
   <script>
-    if (!window.location.href.includes("?version=f36af9")) {
-          window.location.href = window.location.href + "?version=f36af9";
-    }
     
     function generateCommands() {
         var uHeight = document.getElementById("uheight").value;
-        var ChassisPartNumber_Command = `set system cmd -c fru edit 0 field c 0 -i${uHeight} ${document.getElementById('ChassisPartNumber_Command').value}`
-        var ChassisSerialNumber_Command = 'set system cmd -c fru edit 0 field c 1'
-        var ProductPartNumber_Command = 'set system cmd -c fru edit 0 field p 2'
-        var ProductSerialNumber_Command = 'set system cmd -c fru edit 0 field p 4'
-        var ProductAssetTag_Command = 'set system cmd -c fru edit 0 field p 5'
-        var BoardPartNumber_Command = 'set system cmd -c fru edit 0 field b 3'
-        alert(ChassisPartNumber_Command);
+        var ChassisPartNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value}`
+        var ChassisSerialNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value}`
+        var ProductPartNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value}`
+        var ProductSerialNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value}`
+        var ProductAssetTag_Command = `set system cmd -i${uHeight}  -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value}`
+        var BoardPartNumber_Command = `set system cmd -i${uHeight}  -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value}`
+        navigator.clipboard.writeText(`
+          ${ChassisPartNumber_Command}
+          ${ChassisSerialNumber_Command}
+          ${ProductPartNumber_Command}
+          ${ProductSerialNumber_Command}
+          ${ProductAssetTag_Command}
+          ${BoardPartNumber_Command}
+        `);
         return false;
     }
     
@@ -26,8 +30,24 @@
   <form onSubmit="return generateCommands()">
     <p><label for="uheight">Blade # or UHeight</label></p>
     <p><input type="text" id="uheight" name="uheight" value=""></p>
+    
     <p><label for="ChassisPartNumber_Command">Chassis Part Number</label></p>
     <p><input type="text" id="ChassisPartNumber_Command" name="ChassisPartNumber_Command" value=""></p>
+    
+    <p><label for="ChassisSerialNumber_Command">Chassis Serial Number</label></p>
+    <p><input type="text" id="ChassisSerialNumber_Command" name="ChassisSerialNumber_Command" value=""></p>
+
+    <p><label for="ProductPartNumber_Command">Product Part Number</label></p>
+    <p><input type="text" id="ProductPartNumber_Command" name="ProductPartNumber_Command" value=""></p>
+
+    <p><label for="ProductSerialNumber_Command">Product Serial Number</label></p>
+    <p><input type="text" id="ProductSerialNumber_Command" name="ProductSerialNumber_Command" value=""></p>
+
+    <p><label for="ProductAssetTag_Command">Product Asset Number</label></p>
+    <p><input type="text" id="ProductAssetTag_Command" name="ProductAssetTag_Command" value=""></p>
+
+    <p><label for="BoardPartNumber_Command">Board Part Number</label></p>
+    <p><input type="text" id="BoardPartNumber_Command" name="BoardPartNumber_Command" value=""></p>
     
     <p><input name="Generate"  type="submit" value="Generate" /></p>
   </form> 
