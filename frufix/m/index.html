@@ -89,6 +89,10 @@ textarea:focus {
         }
       
         var uHeight = document.getElementById("uheight").value.trim();
+        if (parseInt(uHeight) <= 0 || parseInt(uHeight) > 45) {
+          alert(`${uHeight} is an invalid number for server selection.`);
+          return
+        }
         var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value.trim().toUpperCase()}`
         var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value.trim().toUpperCase()}`
         var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value.trim().toUpperCase()}`
