@@ -67,17 +67,17 @@ textarea:focus {
         if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
           Rejection += "Missing Chassis Part Number\n"
         }else if(!document.getElementById('ChassisPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Chassis Part Number"
+          Rejection += "Invalid Chassis Part Number\n"
         }
         if (document.getElementById('ChassisSerialNumber_Command').value.trim() == "") {
           Rejection += "Missing Chassis Serial Number\n"
         }else if(!document.getElementById('ChassisSerialNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Chassis Serial Number"
+          Rejection += "Invalid Chassis Serial Number\n"
         }
         if (document.getElementById('ProductPartNumber_Command').value.trim() == "") {
           Rejection += "Missing Product Part Number\n"
         }else if(!document.getElementById('ProductPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Product Part Number"
+          Rejection += "Invalid Product Part Number\n"
         }
         if (document.getElementById('ProductSerialNumber_Command').value.trim() == "") {
           Rejection += "Missing Product Serial Number\n"
@@ -88,7 +88,7 @@ textarea:focus {
         if (document.getElementById('BoardPartNumber_Command').value.trim() == "") {
           Rejection += "Missing Board Part Number\n"
         }else if(!document.getElementById('BoardPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Board Part Number"
+          Rejection += "Invalid Board Part Number\n"
         }
 
         if (Rejection != "") {
