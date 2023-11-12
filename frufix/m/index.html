@@ -4,13 +4,13 @@
   <script>
     
     function generateCommands() {
-        var uHeight = document.getElementById("uheight").value;
-        var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value}`
-        var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value}`
-        var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value}`
-        var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value}`
-        var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value}`
-        var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value}`
+        var uHeight = document.getElementById("uheight").value.trim();
+        var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value.trim()}`
+        var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value.trim()}`
+        var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value.trim()}`
+        var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value.trim()}`
+        var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value.trim()}`
+        var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value.trim()}`
         const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
         navigator.clipboard.writeText(Output_Data);
         document.getElementById('Output_Commands').value = `Commands:\n${Output_Data}`;
