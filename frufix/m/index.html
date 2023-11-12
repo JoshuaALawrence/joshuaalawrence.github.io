@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Mariner FRU Fix v1.8</title>
+  <script>
+    
+    function generateCommands() {
+        var uHeight = document.getElementById("uheight").value;
+        var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value}`
+        var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value}`
+        var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value}`
+        var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value}`
+        var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value}`
+        var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value}`
+        const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
+        navigator.clipboard.writeText(Output_Data);
+        document.getElementById('Output_Commands').value = `Commands:\n${Output_Data}`;
+    }
+    
+  </script>  
+  <style>
+    
+  </style>
+</head>
+<body>
+  <form onSubmit="return false">
+    <p><label for="uheight">Blade # or UHeight</label></p>
+    <p><input type="text" id="uheight" name="uheight" value="" placeholder="1"></p>
+    
+    <p><label for="ChassisPartNumber_Command">Chassis Part Number</label></p>
+    <p><input type="text" id="ChassisPartNumber_Command" name="ChassisPartNumber_Command" value="" placeholder="M1143254-001"></p>
+    
+    <p><label for="ChassisSerialNumber_Command">Chassis Serial Number</label></p>
+    <p><input type="text" id="ChassisSerialNumber_Command" name="ChassisSerialNumber_Command" value="" placeholder="526-20072002000187"></p>
+
+    <p><label for="ProductPartNumber_Command">Product Part Number</label></p>
+    <p><input type="text" id="ProductPartNumber_Command" name="ProductPartNumber_Command" value="" placeholder="M1178558-001"></p>
+
+    <p><label for="ProductSerialNumber_Command">Product Serial Number</label></p>
+    <p><input type="text" id="ProductSerialNumber_Command" name="ProductSerialNumber_Command" value="" placeholder="207339190020"></p>
+
+    <p><label for="ProductAssetTag_Command">Product Asset Tag</label></p>
+    <p><input type="text" id="ProductAssetTag_Command" name="ProductAssetTag_Command" value="" placeholder="14177809"></p>
+
+    <p><label for="BoardPartNumber_Command">Board Part Number</label></p>
+    <p><input type="text" id="BoardPartNumber_Command" name="BoardPartNumber_Command" value="" placeholder="M1143271-001"></p>
+    
+    <p><button onclick="generateCommands()">Generate</button></p>
+  </form> 
+
+  <textarea id="Output_Commands" style="width: 450px;height:300px"></textarea>
+</body> 
+</html>
