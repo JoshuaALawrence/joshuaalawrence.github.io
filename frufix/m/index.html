@@ -63,6 +63,31 @@ textarea:focus {
   <script>
     
     function generateCommands() {
+        var Rejection = "";
+        if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
+          Rejection += "Missing Chassis Part Number\n"
+        }
+        if (document.getElementById('ChassisSerialNumber_Command').value.trim() == "") {
+          Rejection += "Missing Chassis Serial Number\n"
+        }
+        if (document.getElementById('ProductPartNumber_Command').value.trim() == "") {
+          Rejection += "Missing Product Part Number\n"
+        }
+        if (document.getElementById('ProductSerialNumber_Command').value.trim() == "") {
+          Rejection += "Missing Product Serial Number\n"
+        }
+        if (document.getElementById('ProductAssetTag_Command').value.trim() == "") {
+          Rejection += "Missing Product Asset Tag\n"
+        }
+        if (document.getElementById('BoardPartNumber_Command').value.trim() == "") {
+          Rejection += "Missing Board Part Number\n"
+        }
+
+        if (Rejection != "") {
+          alert(Rejection.trim());
+          return
+        }
+      
         var uHeight = document.getElementById("uheight").value.trim();
         var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value.trim()}`
         var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value.trim()}`
