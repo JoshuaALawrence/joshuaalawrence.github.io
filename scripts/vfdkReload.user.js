@@ -135,7 +135,7 @@
             setTimeout(() => document.body.removeChild(notification), duration);
         }
 
-        showNotification("Now updating VFDK every 15 seconds.");
+        showNotification("Now updating VFDK every 30 seconds.");
 
         setInterval(() => {
             document.title = "Updating..";
@@ -286,6 +286,6 @@
                         });
                     }
                 }).catch(error => console.error('Error fetching the data:', error));
-        }, 15000);
+        }, 30000);
     });
 })();
