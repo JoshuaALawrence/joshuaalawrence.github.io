@@ -228,7 +228,7 @@
                         const previousCount = window.PreviousErrors.filter(e => e === error).length;
                         const currentCount = errorMatches.filter(e => e === error).length;
 
-                        if (currentCount > previousCount) {
+                        if (currentCount > previousCount && !error.match(/System does not contain old fans./i)) {
                             newErrors.push(...Array(currentCount - previousCount).fill(error));
                         }
                     });
