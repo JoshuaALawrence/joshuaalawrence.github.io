@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         VFDK - Auto Reboot
-// @version      2024-04-15
+// @version      2024-04-22
 // @description  Automatically refresh VFDK test.
 // @author       Joshua Lawrence
 // @match        http://*/wtftest.pl?target_sn=*
@@ -260,13 +260,12 @@
 
                     if (typeof lastAction != "undefined" && lastAction && typeof lastTest != "undefined" && lastTest && (window.lastTest != lastTest.textContent || window.lastAction != lastAction.textContent) && (lastAction.textContent.match(/(exit|reboot)/i) || lastTest.textContent.match(/test-?end/i)) && SN.length >= 2) {
                         window.lastTest = lastTest.textContent;
-
                         window.lastAction = lastAction.textContent;
 
                         const changePayload = {
                             "@type": "MessageCard",
                             "@context": "http://schema.org/extensions",
-                            "text": `[<b>${window.lastTest == lastTest.textContent.match(/test-?end/i) ? "<span style='color:#50C878;'>" : "<span style='color:#D22B2B;'>"} ${window.Floater ? window.Floater : SN} </span></b>]<br><b>Action</b>: ${lastAction.textContent}<br><b>Test</b>: ${lastTest.textContent}`
+                            "text": `[<b>${window.lastTest == lastTest.textContent.match(/(test-?end)/i) || lastAction.textContent.match(/.*?flip.*?/i) ? "<span style='color:#50C878;'>" : "<span style='color:#D22B2B;'>"} ${window.Floater ? window.Floater : SN} </span></b>]<br><b>Action</b>: ${lastAction.textContent}<br><b>Test</b>: ${lastTest.textContent}`
                         };
                         GM_xmlhttpRequest({
                             method: "POST",
