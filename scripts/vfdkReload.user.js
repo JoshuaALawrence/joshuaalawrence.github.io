@@ -7,10 +7,14 @@
 // @downloadURL  https://github.com/JoshuaALawrence/joshuaalawrence.github.io/raw/main/scripts/vfdkReload.user.js
 // @updateURL    https://github.com/JoshuaALawrence/joshuaalawrence.github.io/raw/main/scripts/vfdkReload.user.js
 // @grant        GM_xmlhttpRequest
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function() {
     'use strict';
+
+    var PageName = GM_getValue(window.location.href.split("&")[0])
 
     // Refresh automatically to show warnings and errors
     var url = window.location.href.replace("actual_Show_Warnings=0", "actual_Show_Warnings=1").replace("actual_Show_Errors=0", "actual_Show_Errors=1");
@@ -86,7 +90,9 @@
     });
     document.body.prepend(menuBar);
     document.body.style.paddingBottom = `${menuBar.offsetHeight}px`;
-
+    if (PageName) {
+        document.getElementById("floaterInput").value = PageName;
+    }
     // Start of the script
     document.getElementById('confirmButton').addEventListener('click', function() {
         const floaterValue = floaterInput.value.trim();
@@ -98,6 +104,7 @@
         }
         menuBar.remove();
         window.Floater = floaterValue;
+        GM_setValue(window.location.href.split("&")[0], window.Floater);
         console.log(`Floater type confirmed as: ${window.Floater}`);
         if (window.ScriptRunning) return;
 
