@@ -3,15 +3,15 @@
 # Update package repositories
 sudo apt update
 
-# Install dependencies
-sudo apt install -y python3 python3-pip python3-dev libffi-dev libssl-dev virtualbox virtualbox-guest-additions-iso tcpdump apparmor-utils
+# Install Python 2 and dependencies
+sudo apt install -y python2 python-pip python-dev libffi-dev libssl-dev virtualbox virtualbox-guest-additions-iso tcpdump apparmor-utils
 
 # Install Cuckoo Sandbox dependencies
 sudo apt install -y mongodb postgresql libpq-dev
 
-# Install Python packages
-sudo pip3 install -U pip setuptools
-sudo pip3 install -U cuckoo
+# Install Python packages using Python 2
+sudo pip2 install -U pip setuptools
+sudo pip2 install -U cuckoo
 
 # Configure and initialize Cuckoo
 cuckoo init
