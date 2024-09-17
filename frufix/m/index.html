@@ -62,8 +62,6 @@ textarea:focus {
         var Rejection = "";
         if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
           Rejection += "Missing Chassis Part Number\n"
-        }else if(!document.getElementById('ChassisPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Chassis Part Number\n"
         }
         if (document.getElementById('ChassisSerialNumber_Command').value.trim() == "") {
           Rejection += "Missing Chassis Serial Number\n"
