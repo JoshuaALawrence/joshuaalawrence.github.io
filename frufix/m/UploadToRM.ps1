@@ -32,11 +32,6 @@ param(
     [String]$PASSWORD=""
 )
 
-# Variables
-$script:VFDK_IP = "192.168.1.5"
-$script:VFDK_SUBNET = 24
-$script:VFDK_GATEWAY = "192.168.1.1"
-
 # Function to get the active Ethernet adapter
 function Get-EthernetAdapter {
     $ETHERNET_ADAPTERS = Get-NetAdapter -Physical | Where-Object {
