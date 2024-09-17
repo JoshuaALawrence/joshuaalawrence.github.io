@@ -356,10 +356,10 @@ function Open-Putty {
 # Main script execution with error handling
 try {
     Get-EthernetAdapter
+    Initial-Alert
     Check-WiFi
     Stop-UserSessions
     Get-ComPort
-    Initial-Alert
     Start-SerialSession
     Login-ToRM
     Get-NodeNetworking
