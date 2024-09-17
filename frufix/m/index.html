@@ -101,7 +101,7 @@ textarea:focus {
         var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value.trim().toUpperCase()}`
         var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value.trim().toUpperCase()}`
         var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value.trim().toUpperCase()}`
-        const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}`;
+        const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
         document.getElementById('Output_Commands').value = `${Output_Data}`;
     }
     
