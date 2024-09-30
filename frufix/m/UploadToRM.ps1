@@ -290,7 +290,7 @@ function Launch-WinSCP {
 
 # Wait until the node is reachable on the network
 function Wait-ForSubnet {
-    Write-Host "Waiting for RM to become reachable at $script:NODE_IP_ADDRESS..."
+    Write-Host "Waiting for RM to become reachable at $(script:NODE_IP_ADDRESS)..."
     do {
         Start-Sleep -Seconds 2
         $nodeOnline = Test-Connection -ComputerName $script:NODE_IP_ADDRESS -Count 1 -Quiet -ea SilentlyContinue
