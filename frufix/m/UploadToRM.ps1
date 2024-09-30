@@ -35,7 +35,7 @@ param(
 # Function to get the active Ethernet adapter
 function Get-EthernetAdapter {
     $ETHERNET_ADAPTERS = Get-NetAdapter -Physical | Where-Object {
-        $_.HardwareInterface -and $_.InterfaceAlias -imatch "Ethernet"
+        $_.HardwareInterface -and $_.InterfaceDescription -imatch "Ethernet"
     }
     if ($ETHERNET_ADAPTERS.Count -eq 0) {
         Write-Error "No active Ethernet adapter found."
@@ -250,7 +250,7 @@ function Update-LocalEthernetAdapter {
             ForEach-Object { [Convert]::ToString($_,2).PadLeft(8,'0') } |
             ForEach-Object { $_.ToCharArray() } |
             Where-Object { $_ -eq '1' } | Measure-Object).Count `
-            -DefaultGateway $script:NODE_GATEWAY -ErrorAction Stop
+            -DefaultGateway $script:NODE_GATEWAY -ErrorAction SilentlyContinue
     } catch {
         Initiate-GracefulExit "Failed to set local Ethernet adapter configuration. Error: $_"
     }
@@ -268,7 +268,7 @@ function Echo-RMNetworking {
 # Reset Ethernet adapter to default settings
 function Reset-Ethernet {
     try {
-        Set-NetIPInterface -InterfaceIndex $script:ETHERNET_INDEX -Dhcp Enabled -ErrorAction Stop
+        Set-NetIPInterface -InterfaceIndex $script:ETHERNET_INDEX -Dhcp Enabled -ErrorAction SilentlyContinue
         Remove-NetIPAddress -InterfaceIndex $script:ETHERNET_INDEX -Confirm:$false -ErrorAction SilentlyContinue
         Remove-NetRoute -InterfaceIndex $script:ETHERNET_INDEX -Confirm:$false -ErrorAction SilentlyContinue
     } catch {
@@ -308,7 +308,7 @@ function Enable-WiFi {
             # Enable the adapter if it's disabled
             if ($adapter.Status -ne 'Up') {
                 Write-Host "Enabling Wi-Fi adapter: $($adapter.Name)"
-                Enable-NetAdapter -Name $adapter.Name -Confirm:$false -ErrorAction Stop
+                Enable-NetAdapter -Name $adapter.Name -Confirm:$false -ErrorAction SilentlyContinue
             }
         }
 
@@ -335,8 +335,8 @@ function Enable-WiFi {
 function Reset-ToLinux {
     Write-Host "Resetting Ethernet adapter to use DHCP for IP and DNS settings."
     try {
-        Set-NetIPInterface -InterfaceIndex $script:ETHERNET_INDEX -Dhcp Enabled -ErrorAction Stop
-        Set-DnsClientServerAddress -InterfaceIndex $script:ETHERNET_INDEX -ResetServerAddresses -ErrorAction Stop
+        Set-NetIPInterface -InterfaceIndex $script:ETHERNET_INDEX -Dhcp Enabled -ErrorAction SilentlyContinue
+        Set-DnsClientServerAddress -InterfaceIndex $script:ETHERNET_INDEX -ResetServerAddresses -ErrorAction SilentlyContinue
         Write-Host "Ethernet adapter successfully reset to use DHCP for IP and DNS."
     } catch {
         Write-Warning "Failed to reset Ethernet adapter to DHCP settings. Error: $_"
@@ -368,6 +368,7 @@ try {
     Reset-ToLinux
     Open-Putty
 } catch {
+    Enable-WiFi
     # Log the error for debugging
     $errorMessage = @"
 Error occurred:
