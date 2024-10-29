@@ -33174,7 +33174,7 @@ async function hashText(text) {
       if (!input) {
         result.textContent = "Please enter a serial number.";
         result.style.color = "#e67e22"; // Orange color
-      } else if (serialNumbers.includes(input)) {
+      } else if (serialNumbers.includes(input.toUpperCase())) {
         result.textContent = "Replacement Necessary";
         result.style.color = "#e74c3c"; // Red color
       } else {
