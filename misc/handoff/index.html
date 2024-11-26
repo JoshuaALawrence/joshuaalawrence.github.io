@@ -1,67 +1,62 @@
 <html>
 <head>
-  <title>Handoff v0.1</title>
+  <title>Handoff v0.2</title>
   <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #c3c3c3;
-  padding: 20px;
-  color: #333;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #c3c3c3;
+      padding: 20px;
+      color: #333;
+    }
 
-label {
-  display: block;
-  margin-top: 4px;
-  color: #666;
-}
+    label {
+      display: block;
+      margin-top: 5px; /* Reduced margin between label and input */
+      margin-bottom: 2px; /* Added small space between label and input */
+      color: #666;
+    }
 
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-  box-sizing: border-box;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-}
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 6px; /* Reduced padding for smaller inputs */
+      margin: 4px 0; /* Reduced margin between fields */
+      box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+    }
 
-input[type="text"]:focus {
-  border-color: #0056b3;
-}
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #0056b3;
+    }
 
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-button:hover {
-  background-color: #0056b3;
-}
+    button:hover {
+      background-color: #0056b3;
+    }
 
-textarea {
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  width: 100%;
-  height: 110px !important;
-  padding: 8px;
-  resize: vertical;
-}
-
-textarea:focus {
-  border-color: #0056b3;
-}
-
-    </style>
+    textarea {
+      height: 110px !important;
+      resize: vertical;
+    }
+  </style>
   <script>
     const $ = (e) => {
       return document.getElementById(e).value.trim();
     }
+
     function generateHandoff() {
-        document.getElementById('Output_Handoff').value = `Floater: ${$("Floater")}
+      document.getElementById('Output_Handoff').value = `Floater: ${$("Floater")}
 RMC: ${$("RMC")}
 ${$("Task_ID")} | ${$("Location")}
 SN: 207173030001 | SNOW: ${$("WOT")}
@@ -84,24 +79,24 @@ DCN:${$("Notes")}`;
     <p><label for="Location">Location</label></p>
     <p><input type="text" id="Location" name="Location" value=""></p>
 
-    <p><label for="Node_SN">Node SN</small></label></p>
+    <p><label for="Node_SN">Node SN</label></p>
     <p><input type="text" id="Node_SN" name="Node_SN" value=""></p>
 
-    <p><label for="WOT">WOT</small></label></p>
+    <p><label for="WOT">WOT</label></p>
     <p><input type="text" id="WOT" name="WOT" value=""></p>
 
     <p><label for="Break_Fix">Break Fix</label></p>
-    <p><input type="text" id="Break_Fix" name="Notes" value=""></p>
+    <p><input type="text" id="Break_Fix" name="Break_Fix" value=""></p>
 
     <p><label for="Notes">Notes</label></p>
-    <p><textarea id="Notes" name="Notes" value=""></textarea>
+    <p><textarea id="Notes" name="Notes"></textarea></p>
 
     <script>
       const $$ = (e) => {
         return document.getElementById(e);
       }
       $$("Floater")?.addEventListener("keydown", (e) => {
-          generateHandoff();
+        generateHandoff();
       });
     </script>
   </form> 
