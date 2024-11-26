@@ -1,0 +1,111 @@
+<html>
+<head>
+  <title>Handoff v0.1</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #c3c3c3;
+  padding: 20px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+  box-sizing: border-box;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+input[type="text"]:focus {
+  border-color: #0056b3;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+textarea {
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+  height: 110px !important;
+  padding: 8px;
+  resize: vertical;
+}
+
+textarea:focus {
+  border-color: #0056b3;
+}
+
+    </style>
+  <script>
+    const $ = (e) => {
+      return document.getElementById(e).value.trim();
+    }
+    function generateHandoff() {
+        document.getElementById('Output_Handoff').value = `Floater: ${$("Floater")}
+RMC: ${$("RMC")}
+${$("Task_ID")} | DSM07/F01C04-AD424/1_3
+SN: 207173030001 | SNOW: ${$("WOT")}
+Break Fix: ${$("Break_Fix")}
+DCN:${$("Notes")}`;
+    }
+  </script>  
+</head>
+<body>
+  <form onSubmit="return false">
+    <p><label for="Floater">Floater</label></p>
+    <p><input type="text" id="Floater" name="Floater" value=""></p>
+    
+    <p><label for="RMC">RMC</label></p>
+    <p><input type="text" id="RMC" name="RMC" value=""></p>
+    
+    <p><label for="Task_ID">Task ID</label></p>
+    <p><input type="text" id="Task_ID" name="Task_ID" value=""></p>
+
+    <p><label for="Location">Location</label></p>
+    <p><input type="text" id="Location" name="Location" value=""></p>
+
+    <p><label for="Node_SN">Node SN</small></label></p>
+    <p><input type="text" id="Node_SN" name="Node_SN" value=""></p>
+
+    <p><label for="WOT">WOT</small></label></p>
+    <p><input type="text" id="WOT" name="WOT" value=""></p>
+
+    <p><label for="Break_Fix">Break Fix</label></p>
+    <p><input type="text" id="Break_Fix" name="Notes" value=""></p>
+
+    <p><label for="Notes">Notes</label></p>
+    <p><textarea id="Notes" name="Notes" value=""></textarea>
+
+    <script>
+      const $ = (e) => {
+        return document.getElementById(e);
+      }
+      $("Floater")?.addEventListener("keydown", (e) => {
+          generateHandoff();
+      });
+    </script>
+  </form> 
+
+  <textarea id="Output_Handoff"></textarea>
+</body> 
+</html>
