@@ -95,9 +95,9 @@ DCN:${$("Notes")}`;
       const $$ = (e) => {
         return document.getElementById(e);
       }
-      $$("Floater")?.addEventListener("keydown", (e) => {
+      ["Break_Fix", "WOT", "Node_SN", "Location", "Task_ID", "RMC", "Floater", "Notes"].forEach((id) => {$$(id)?.addEventListener("keydown", (e) => {
         generateHandoff();
-      });
+      })});
     </script>
   </form> 
 
