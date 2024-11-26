@@ -11,7 +11,7 @@ body {
 
 label {
   display: block;
-  margin-top: 10px;
+  margin-top: 4px;
   color: #666;
 }
 
@@ -63,7 +63,7 @@ textarea:focus {
     function generateHandoff() {
         document.getElementById('Output_Handoff').value = `Floater: ${$("Floater")}
 RMC: ${$("RMC")}
-${$("Task_ID")} | DSM07/F01C04-AD424/1_3
+${$("Task_ID")} | ${$("Location")}
 SN: 207173030001 | SNOW: ${$("WOT")}
 Break Fix: ${$("Break_Fix")}
 DCN:${$("Notes")}`;
