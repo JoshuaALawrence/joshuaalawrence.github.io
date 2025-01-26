@@ -59,6 +59,9 @@
   <script>
     function generateCommands() {
       var Rejection = "";
+      if (document.getElementById('uheight').value.trim() == "") {
+        Rejection += "Missing node #\n"
+      }
       if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
         Rejection += "Missing Chassis Part Number\n"
       }
