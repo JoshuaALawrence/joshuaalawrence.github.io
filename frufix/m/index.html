@@ -1,114 +1,153 @@
 <html>
 <head>
-  <title>FRU Fix v1.8</title>
+  <title>FRU Fix v1.9</title>
   <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #c3c3c3;
-  padding: 20px;
-  color: #333;
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-  color: #666;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  margin: 6px 0;
-  box-sizing: border-box;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-}
-
-input[type="text"]:focus {
-  border-color: #0056b3;
-}
-
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-textarea {
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  width: 100%;
-  height: 110px !important;
-  padding: 8px;
-  resize: vertical;
-}
-
-textarea:focus {
-  border-color: #0056b3;
-}
-
-    </style>
-  <script>
-    
-    function generateCommands() {
-        var Rejection = "";
-        if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
-          Rejection += "Missing Chassis Part Number\n"
-        }
-        if (document.getElementById('ChassisSerialNumber_Command').value.trim() == "") {
-          Rejection += "Missing Chassis Serial Number\n"
-        }else if(!document.getElementById('ChassisSerialNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Chassis Serial Number\n"
-        }
-        if (document.getElementById('ProductPartNumber_Command').value.trim() == "") {
-          Rejection += "Missing Product Part Number\n"
-        }else if(!document.getElementById('ProductPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Product Part Number\n"
-        }
-        if (document.getElementById('ProductSerialNumber_Command').value.trim() == "") {
-          Rejection += "Missing Product Serial Number\n"
-        }
-        if (document.getElementById('ProductAssetTag_Command').value.trim() == "") {
-          Rejection += "Missing Product Asset Tag\n"
-        }
-        if (document.getElementById('BoardPartNumber_Command').value.trim() == "") {
-          Rejection += "Missing Board Part Number\n"
-        }else if(!document.getElementById('BoardPartNumber_Command').value.trim().includes("-")) {
-          Rejection += "Invalid Board Part Number\n"
-        }
-
-        if (Rejection != "") {
-          alert(Rejection.trim());
-          return
-        }
-      
-        var uHeight = document.getElementById("uheight").value.trim();
-        if (parseInt(uHeight) <= 0 || parseInt(uHeight) > 45) {
-          alert(`${uHeight} is an invalid number for server selection.`);
-          return
-        }
-        var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value.trim().toUpperCase()}`
-        var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value.trim().toUpperCase()}`
-        var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value.trim().toUpperCase()}`
-        var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value.trim().toUpperCase()}`
-        var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value.trim().toUpperCase()}`
-        var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value.trim().toUpperCase()}`
-        const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
-        document.getElementById('Output_Commands').value = `${Output_Data}`;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #c3c3c3;
+      padding: 20px;
+      color: #333;
     }
-    
-  </script>  
+
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #666;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0056b3;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    textarea {
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      width: 100%;
+      height: 110px !important;
+      padding: 8px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: #0056b3;
+    }
+
+  </style>
+  <script>
+    function generateCommands() {
+      var Rejection = "";
+      if (document.getElementById('ChassisPartNumber_Command').value.trim() == "") {
+        Rejection += "Missing Chassis Part Number\n"
+      }
+      if (document.getElementById('ChassisSerialNumber_Command').value.trim() == "") {
+        Rejection += "Missing Chassis Serial Number\n"
+      } else if (!document.getElementById('ChassisSerialNumber_Command').value.trim().includes("-")) {
+        Rejection += "Invalid Chassis Serial Number\n"
+      }
+      if (document.getElementById('ProductPartNumber_Command').value.trim() == "") {
+        Rejection += "Missing Product Part Number\n"
+      } else if (!document.getElementById('ProductPartNumber_Command').value.trim().includes("-")) {
+        Rejection += "Invalid Product Part Number\n"
+      }
+      if (document.getElementById('ProductSerialNumber_Command').value.trim() == "") {
+        Rejection += "Missing Product Serial Number\n"
+      }
+      if (document.getElementById('ProductAssetTag_Command').value.trim() == "") {
+        Rejection += "Missing Product Asset Tag\n"
+      }
+      if (document.getElementById('BoardPartNumber_Command').value.trim() == "") {
+        Rejection += "Missing Board Part Number\n"
+      } else if (!document.getElementById('BoardPartNumber_Command').value.trim().includes("-")) {
+        Rejection += "Invalid Board Part Number\n"
+      }
+
+      if (Rejection != "") {
+        alert(Rejection.trim());
+        return
+      }
+
+      var uHeight = document.getElementById("uheight").value.trim();
+      if (parseInt(uHeight) <= 0 || parseInt(uHeight) > 45) {
+        alert(`${uHeight} is an invalid number for server selection.`);
+        return
+      }
+
+      var ChassisPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 0 ${document.getElementById('ChassisPartNumber_Command').value.trim().toUpperCase()}`
+      var ChassisSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field c 1 ${document.getElementById('ChassisSerialNumber_Command').value.trim().toUpperCase()}`
+      var ProductPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 2 ${document.getElementById('ProductPartNumber_Command').value.trim().toUpperCase()}`
+      var ProductSerialNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 4 ${document.getElementById('ProductSerialNumber_Command').value.trim().toUpperCase()}`
+      var ProductAssetTag_Command = `set system cmd -i${uHeight} -c fru edit 0 field p 5 ${document.getElementById('ProductAssetTag_Command').value.trim().toUpperCase()}`
+      var BoardPartNumber_Command = `set system cmd -i${uHeight} -c fru edit 0 field b 3 ${document.getElementById('BoardPartNumber_Command').value.trim().toUpperCase()}`
+      const Output_Data = `${ChassisPartNumber_Command}\n${ChassisSerialNumber_Command}\n${ProductPartNumber_Command}\n${ProductSerialNumber_Command}\n${ProductAssetTag_Command}\n${BoardPartNumber_Command}\n`;
+      document.getElementById('Output_Commands').value = `${Output_Data}`;
+    }
+
+    function parseIpmiResponse() {
+      var response = document.getElementById("ipmiResponse").value;
+
+      var chassisPartNumberMatch = response.match(/Chassis Part Number\s+:\s+([^\n]+)/);
+      var chassisSerialNumberMatch = response.match(/Chassis Serial\s+:\s+([^\n]+)/);
+      var productPartNumberMatch = response.match(/Product Part Number\s+:\s+([^\n]+)/);
+      var productSerialNumberMatch = response.match(/Product Serial\s+:\s+([^\n]+)/);
+      var productAssetTagMatch = response.match(/Product Asset Tag\s+:\s+([^\n]+)/);
+      var boardPartNumberMatch = response.match(/Board Part Number\s+:\s+([^\n]+)/);
+
+      var ipmiHeightMatch = response.match(/set\s+(sys|system)\s+cmd\s+-i(\d+)\s+/);
+      var ipmiHeight = ipmiHeightMatch ? parseInt(ipmiHeightMatch[2]) : 0;
+
+      if (ipmiHeight > 0 && (!document.getElementById('uheight').value.trim() || parseInt(document.getElementById('uheight').value.trim()) < ipmiHeight)) {
+        document.getElementById("uheight").value = ipmiHeight;
+      }
+
+      if (chassisPartNumberMatch) {
+        document.getElementById("ChassisPartNumber_Command").value = chassisPartNumberMatch[1].trim();
+      }
+      if (chassisSerialNumberMatch) {
+        document.getElementById("ChassisSerialNumber_Command").value = chassisSerialNumberMatch[1].trim();
+      }
+      if (productPartNumberMatch) {
+        document.getElementById("ProductPartNumber_Command").value = productPartNumberMatch[1].trim();
+      }
+      if (productSerialNumberMatch) {
+        document.getElementById("ProductSerialNumber_Command").value = productSerialNumberMatch[1].trim();
+      }
+      if (productAssetTagMatch) {
+        document.getElementById("ProductAssetTag_Command").value = productAssetTagMatch[1].trim();
+      }
+      if (boardPartNumberMatch) {
+        document.getElementById("BoardPartNumber_Command").value = boardPartNumberMatch[1].trim();
+      }
+    }
+  </script>
 </head>
 <body>
   <form onSubmit="return false">
+    <p><label for="ipmiResponse">Paste old FRU</label></p>
+    <p><textarea id="ipmiResponse" name="ipmiResponse" placeholder="Paste the IPMI response here..." oninput="parseIpmiResponse()"></textarea></p>
+    
     <p><label for="uheight">Blade # or UHeight</label></p>
     <p><input type="text" id="uheight" name="uheight" value="" placeholder="1"></p>
     
